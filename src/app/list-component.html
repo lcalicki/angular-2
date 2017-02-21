@@ -1,0 +1,65 @@
+<div class="container">
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">UserId to:</h4>
+      </div>
+      <!-- Treść -->
+      <div class="modal-body" *ngFor= 'let user of users' >
+        <h4>{{user.id}}</h4>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{listtitle}}
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">Filtruj przez:</div>
+      <div class="col-md-4">
+        <input [(ngModel)]="listfilter" type="text" />
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Przefiltrowane przez:{{listfilter}}</h3>
+        </div>
+      </div>
+      <div class="table-bordered ">
+        <table class="table" *ngIf='users && users.length'>
+          <thead>
+          <tr>
+            <th>BUTTON</th>
+            <th>TITLE</th>
+            <th>BODY</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor= 'let user of users'>
+            <td>
+              <button id="openModalButton" [hidden]="false" data-toggle="modal" data-target="#myModal">Podaj Id</button>
+            </td>
+            <td>{{user.title}}</td>
+            <td>{{user.body}}</td>
+
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
