@@ -3,10 +3,12 @@ import {UserService} from "./user-service";
 import {IUser} from "./users";
 
 
+
 @Component({
   moduleId:'module.id',
   selector:'ls-app',
-  templateUrl:'list-component.html'
+  templateUrl:'list-component.html',
+  styleUrls:['./list-component.css']
 
 })
 
@@ -25,12 +27,18 @@ export class ListComponent implements OnInit{
 
   ngOnInit(): void {
     this._userService.getUsers()
-      .subscribe(
+            .subscribe(
         users => this.users = users,
         error => this.errorMessage = <any>error
       );
   }
+selectedUser: IUser;
+  user:IUser;
 
+  onSelect(user:IUser):void {
+    this.selectedUser=user;
+    this.selectedUser.id=user.id;
+  }
 
 }
 

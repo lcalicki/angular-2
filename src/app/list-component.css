@@ -1,0 +1,15 @@
+.panel-heading {
+
+  font-size: x-large;
+  font-style: italic;
+}
+.selected {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: black;
+}
+
+.table {
+
+  cursor: pointer;
+
+}

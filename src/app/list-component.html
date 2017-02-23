@@ -1,14 +1,13 @@
 <div class="container">
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="myModal" *ngIf="selectedUser">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">UserId to:</h4>
+        <h4 class="modal-title">Podaje Id skryptu:</h4>
       </div>
       <!-- Treść -->
-      <div class="modal-body" *ngFor= 'let user of users' >
-        <h4>{{user.id}}</h4>
-
+      <div class="modal-body" >
+        <h4>Unikalne id tego skryptu to: {{selectedUser.id}}</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">
@@ -20,8 +19,8 @@
 
 
 <div class="panel panel-primary">
-  <div class="panel-heading">
-    {{listtitle}}
+  <div class ="panel-heading" >
+    {{listtitletitle}}
   </div>
   <div class="panel-body">
     <div class="row">
@@ -34,22 +33,26 @@
           <h3>Przefiltrowane przez:{{listfilter}}</h3>
         </div>
       </div>
-      <div class="table-bordered ">
-        <table class="table" *ngIf='users && users.length'>
+      <div class="table table-hover">
+        <table class="table table-hover" *ngIf='users && users.length'>
           <thead>
           <tr>
             <th>BUTTON</th>
             <th>TITLE</th>
             <th>BODY</th>
+            <th>USER</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor= 'let user of users'>
+          <tr *ngFor= 'let user of users| userFilter:listfilter'
+              [class.selected]="user === selectedUser"
+              (click)="onSelect(user)">
             <td>
-              <button id="openModalButton" [hidden]="false" data-toggle="modal" data-target="#myModal">Podaj Id</button>
+              <button id="openModalButton" [hidden]="false" data-toggle="modal" data-target="#myModal" >Podaj Id</button>
             </td>
             <td>{{user.title}}</td>
             <td>{{user.body}}</td>
+            <td>{{user.userId}}</td>
 
 
           </tr>

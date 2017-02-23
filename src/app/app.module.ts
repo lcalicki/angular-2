@@ -5,17 +5,27 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {ListComponent} from "./list-component";
+import {UserFilterPipe} from "./user-filter.pipe";
+import {UserDetailComponent} from "./user-detail.component";
+import {WelcomComponent} from "./welcom.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
-  ],
+    ListComponent,
+    UserFilterPipe,
+
+  
+
+    ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

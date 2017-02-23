@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IUser} from './users';
+import {ISourceUser} from './sourceUsers';
 import {Http,Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -17,15 +18,19 @@ export class UserService {
 
   getUsers(): Observable<IUser[]> {
     return this._http.get(this._productUrl)
-      .map((response:Response)=> <IUser[]>response.json())
-  .do(data => console.log('All: ' +  JSON.stringify(data)))
+      .map((response:Response) => {
+        let usersRead = <ISourceUser[]>response.json();
+        let result:IUser[] = [];
+        for(let user of usersRead) {
+          result.push({userId: user.userId, id: user.id, title: user.title, body: user.body});
+        }
+       return result;
+      })
+      .do(data => console.log('All: ' +  JSON.stringify(data)))
       .catch(this.handleError);
   }
 
-  getUser (id: number): Observable<IUser> {
-    return this.getUsers()
-      .map((users: IUser[]) => users.find(p => p.userId === id));
-  }
+
 
   private handleError(error: Response) {
     // in a real world app, we may send the server to some remote logging infrastructure
